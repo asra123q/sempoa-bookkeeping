@@ -1,0 +1,49 @@
+services:
+
+  frontend:
+    build: ./frontend/sempoa-app
+    ports:
+      - "5173:5173"
+
+  auth:
+    build: ./backend/auth
+    ports:
+      - "8003:8003"
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/sempoa
+      REDIS_ADDR: redis:6379
+    depends_on:
+      - postgres
+      - redis
+
+  bookkeeping:
+    build: ./backend/bookkeeping
+    ports:
+      - "8005:8005"
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/sempoa
+    depends_on:
+      - postgres
+
+  reporting:
+    build: ./backend/reporting
+    ports:
+      - "8007:8007"
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/sempoa
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+  redis:
+    image: redis:8-alpine
+
+volumes:
+  postgres_data:

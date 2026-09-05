@@ -1,0 +1,6 @@
+## Improvements
+
+- [ ] Create validators for authentication request inputs and relevant payloads.
+- [ ] Add rate-limiting middleware for authentication endpoints.
+- [ ] Configure rate-limit thresholds, response behavior, and trusted proxy handling.
+- [ ] Add tests covering validator failures and rate-limit enforcement.

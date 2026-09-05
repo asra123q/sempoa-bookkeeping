@@ -18,7 +18,7 @@ func OpenDatabaseConnection() {
 	databaseName := os.Getenv("POSTGRES_DATABASE")
 	port := os.Getenv("POSTGRES_PORT")
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=require TimeZone=Africa/Douala", host, username, password, databaseName, port)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=Africa/Douala", host, username, password, databaseName, port)
 
 	Database, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
@@ -30,5 +30,5 @@ func OpenDatabaseConnection() {
 }
 
 func AutoMigrateModels() {
-	Database.AutoMigrate(&Startup{})
+	Database.AutoMigrate(&User{})
 }

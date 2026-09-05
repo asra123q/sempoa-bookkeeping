@@ -1,0 +1,35 @@
+ # Session and API Key Validators/Middleware TODO
+
+ ## Session validation
+
+ - [ ] Define the session model and required fields (ID, user ID, expiration, revocation status).
+ - [ ] Add validation for missing, malformed, expired, and revoked session tokens.
+ - [ ] Verify session tokens securely and avoid trusting client-provided user IDs.
+ - [ ] Load the session and authenticated user into the request context.
+ - [ ] Add configurable session expiration and refresh behavior.
+ - [ ] Implement logout/revocation handling and session cleanup.
+
+ ## API key validation
+
+ - [ ] Define the API key format, storage model, scopes, status, and expiration rules.
+ - [ ] Validate missing, malformed, expired, revoked, and disabled API keys.
+ - [ ] Hash API keys at rest and compare them using a constant-time method.
+ - [ ] Load key metadata and allowed scopes into the request context.
+ - [ ] Support key rotation and revocation without exposing secret values.
+
+ ## Middleware
+
+ - [ ] Create authentication middleware that accepts only the intended credential locations.
+ - [ ] Add authorization middleware for required roles/scopes per route.
+ - [ ] Define precedence and conflict behavior when both a session and API key are supplied.
+ - [ ] Return consistent `401` and `403` responses without leaking credential details.
+ - [ ] Add rate limiting and abuse protection for authentication failures.
+ - [ ] Ensure middleware handles errors, cancellation, and missing context values safely.
+
+ ## Testing and operations
+
+ - [ ] Add unit tests for each validator and edge case.
+ - [ ] Add integration tests covering protected routes and credential combinations.
+ - [ ] Test token/key rotation, revocation, expiration, and clock boundaries.
+ - [ ] Add structured audit logging without logging tokens or API key secrets.
+ - [ ] Document configuration, route usage, and security assumptions.
